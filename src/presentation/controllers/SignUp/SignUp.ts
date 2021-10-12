@@ -1,7 +1,6 @@
-import { AddAccount } from '../../domain/usecases/add-account'
-import { InvalidParamError, MissingParamError } from '../errors'
-import { badRequest, serverError } from '../helpers/htttp-helper'
-import { Controller, EmailValidator, HttpRequest, HttpResponse } from '../protocols'
+import { Controller, EmailValidator, HttpRequest, HttpResponse, AddAccount } from './signup-protocols'
+import { InvalidParamError, MissingParamError } from '../../errors'
+import { badRequest, serverError } from '../../helpers/htttp-helper'
 
 const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
 
