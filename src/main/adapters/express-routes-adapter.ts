@@ -1,4 +1,4 @@
-import { Request, Response, RequestHandler } from 'express'
+import { Request, RequestHandler, Response } from 'express'
 import { Controller, HttpRequest } from '../../presentation/protocols'
 
 export const adaptRoute = (controller: Controller): RequestHandler => {
@@ -7,6 +7,12 @@ export const adaptRoute = (controller: Controller): RequestHandler => {
       body: req.body
     }
     const httpResponse = await controller.handle(httpRequest)
-    return res.status(httpResponse.statusCode).json(httpResponse.body)
+    if (httpResponse.statusCode === 200) {
+      return res.status(httpResponse.statusCode).json(httpResponse.body)
+    } else {
+      return res.status(httpResponse.statusCode).json({
+        error: httpResponse.body.message
+      })
+    }
   }
 }
