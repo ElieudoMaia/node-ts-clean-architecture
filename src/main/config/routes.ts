@@ -1,11 +1,19 @@
 import { Express, Router } from 'express'
-import fg from 'fast-glob'
+import { readdirSync } from 'fs'
+import path from 'path'
 
 export default (app: Express): void => {
   const router = Router()
-  fg.sync('**/src/main/routes/**routes.ts').map(async (filePath) => {
-    const route = (await import(`./../../../${filePath}`)).default
-    route(router)
+  const routesPath = path.resolve(__dirname, '..', 'routes')
+  readdirSync(routesPath).forEach((fileName) => {
+    (async () => {
+      if (!fileName.includes('.test.')) {
+        const route = (await import(`../routes/${fileName}`)).default
+        route(router)
+      }
+    })().catch((error) => {
+      console.error('Erro ao importar rotas', error)
+    })
   })
   app.use('/api', router)
 }
