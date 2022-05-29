@@ -14,8 +14,8 @@ const makeEncypterStub = (): Hasher => {
 
 const makeLoadAccountRepository = (): LoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
-    async loadByEmail (email: string): Promise<AccountModel> {
-      return makeFakeAccount()
+    async loadByEmail (email: string): Promise<AccountModel | null> {
+      return null
     }
   }
   return new LoadAccountByEmailRepositoryStub()
@@ -97,10 +97,17 @@ describe('DbAddAccount UseCase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Should return ab account on success', async () => {
+  test('Should return an account on success', async () => {
     const { sut } = makeSut()
     const response = await sut.add(makeFakeAccountData())
     expect(response).toEqual(makeFakeAccount())
+  })
+
+  test('Should return null if loadAccountByEmailRepository not returns null', async () => {
+    const { sut, loadAccountByEmailRepositoryStub } = makeSut()
+    jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockResolvedValueOnce(makeFakeAccount())
+    const account = await sut.add(makeFakeAccountData())
+    expect(account).toBeNull()
   })
 
   test('Should call LoadAccountByEmailRepository with correct email', async () => {
