@@ -7,5 +7,5 @@ export const makeAddAccountUseCase = (): AddAccount => {
   const hashSalts = 12
   const bcryptAdapter = new BcryptAdapter(hashSalts)
   const addAccountRepository = new AccountMongoRepository()
-  return new DbAddAccount(bcryptAdapter, addAccountRepository)
+  return new DbAddAccount(bcryptAdapter, addAccountRepository, addAccountRepository)
 }
