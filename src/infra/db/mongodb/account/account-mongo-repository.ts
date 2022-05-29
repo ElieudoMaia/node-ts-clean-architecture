@@ -23,7 +23,7 @@ export class AccountMongoRepository implements AddAccountRepository, LoadAccount
     if (!account) return null
 
     const accountDTO: AccountModel = {
-      id: account._id,
+      id: account._id.toString(),
       name: account.name,
       email: account.email,
       password: account.password
