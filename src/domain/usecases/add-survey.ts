@@ -1,6 +1,6 @@
 export interface AnswerModel {
   answer: string
-  image: string
+  image?: string
 }
 
 export interface AddSurveyModel {
