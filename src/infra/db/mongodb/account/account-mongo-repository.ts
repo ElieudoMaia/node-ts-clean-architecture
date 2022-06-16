@@ -40,7 +40,10 @@ implements
 
   async loadByToken (accessToken: string, role?: string | undefined): Promise<AccountModel | null> {
     const accountCollection = await MongoHelper.getCollection('accounts')
-    const account = await accountCollection.findOne({ accessToken, role })
+    const account = await accountCollection.findOne({
+      accessToken,
+      $or: [{ role }, { role: 'admin' }]
+    })
     if (!account) return null
 
     const accountDTO: AccountModel = {
