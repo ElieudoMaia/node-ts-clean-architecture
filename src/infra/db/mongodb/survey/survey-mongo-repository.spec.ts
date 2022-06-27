@@ -79,5 +79,12 @@ describe('Survey Mongo Repository', () => {
       expect(surveys[0].question).toBe('any_question')
       expect(surveys[1].question).toBe('other_question')
     })
+
+    test('Should return a empty list when there is no data', async () => {
+      const sut = makeSut()
+      const surveys = await sut.loadAll()
+      expect(surveys.length).toBe(0)
+      expect(surveys).toEqual([])
+    })
   })
 })
