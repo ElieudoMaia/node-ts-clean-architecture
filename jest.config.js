@@ -7,5 +7,8 @@ module.exports = {
   coverageProvider: 'babel',
   transform: {
     '.+\\.ts$': 'ts-jest'
+  },
+  moduleNameMapper: {
+    '@/(.*)': '<rootDir>/src/$1'
   }
 }

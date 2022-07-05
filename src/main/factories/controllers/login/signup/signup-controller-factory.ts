@@ -1,5 +1,5 @@
-import { SignUpController } from '../../../../../presentation/controllers/login/signup/signup-controller'
-import { Controller } from '../../../../../presentation/protocols'
+import { SignUpController } from '@/presentation/controllers/login/signup/signup-controller'
+import { Controller } from '@/presentation/protocols'
 import { makeLoggerDecoratorController } from '../../../decorators/log-controller-decorator-factory'
 import { makeAddAccountUseCase } from '../../../usecases/account/add-acccount/db-add-account'
 import { makeDbAuthenticationUseCase } from '../../../usecases/account/authentication/db-authentication-factory'

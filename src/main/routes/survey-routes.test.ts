@@ -4,8 +4,8 @@ import { sign } from 'jsonwebtoken'
 import request from 'supertest'
 import env from '../config/env'
 import app from '../config/app'
-import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
-import { AddSurveyModel } from '../../domain/usecases/add-survey'
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
+import { AddSurveyModel } from '@/domain/usecases/add-survey'
 
 let surveyCollection: Collection
 let accountCollection: Collection
